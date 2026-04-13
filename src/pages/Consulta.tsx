@@ -56,7 +56,15 @@ const Consulta = () => {
             <form onSubmit={handleConsultar} className="space-y-6">
               {/* Tipo de busca */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Tipo de busca</label>
+                <label className="text-sm font-medium text-foreground flex items-center gap-1">
+                  Tipo de busca
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs text-xs">Define a forma de busca do NCM (completo, capítulo ou posição)</TooltipContent>
+                  </Tooltip>
+                </label>
                 <div className="grid grid-cols-3 gap-2">
                   {buscaOptions.map((opt) => (
                     <button
@@ -78,7 +86,15 @@ const Consulta = () => {
 
               {/* Código */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Código</label>
+                <label className="text-sm font-medium text-foreground flex items-center gap-1">
+                  Código
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs text-xs">Código de classificação fiscal da mercadoria</TooltipContent>
+                  </Tooltip>
+                </label>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -92,7 +108,15 @@ const Consulta = () => {
 
               {/* Valor */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Valor da Importação (R$)</label>
+                <label className="text-sm font-medium text-foreground flex items-center gap-1">
+                  Valor da Importação (R$)
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs text-xs">Valor total do produto importado em reais</TooltipContent>
+                  </Tooltip>
+                </label>
                 <Input
                   type="number"
                   value={valor}
