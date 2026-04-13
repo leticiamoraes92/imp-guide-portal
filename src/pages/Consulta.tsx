@@ -39,7 +39,7 @@ const Consulta = () => {
   };
 
   const buscaOptions: { value: TipoBusca; label: string; icon: React.ReactNode; placeholder: string }[] = [
-    { value: "ncm", label: "NCM Completo", icon: <Hash className="h-5 w-5" />, placeholder: "Ex: 8471.30.19" },
+    { value: "ncm", label: "NCM", icon: <Hash className="h-5 w-5" />, placeholder: "Ex: 8471.30.19" },
     { value: "capitulo", label: "Capítulo", icon: <Layers className="h-5 w-5" />, placeholder: "Ex: 84" },
     { value: "posicao", label: "Posição", icon: <LayoutGrid className="h-5 w-5" />, placeholder: "Ex: 8471" },
   ];
@@ -50,7 +50,15 @@ const Consulta = () => {
       <main className="flex-1 container mx-auto px-4 py-8 max-w-2xl">
         <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-xl text-center">Consulta de Classificação Fiscal (NCM)</CardTitle>
+            <CardTitle className="text-xl text-center flex items-center justify-center gap-1">
+              Consulta de Classificação Fiscal (NCM)
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs text-xs">Sistema para consulta da classificação fiscal de mercadorias utilizadas em operações de importação</TooltipContent>
+              </Tooltip>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleConsultar} className="space-y-6">
@@ -62,7 +70,7 @@ const Consulta = () => {
                     <TooltipTrigger asChild>
                       <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-xs text-xs">Define a forma de busca do NCM (completo, capítulo ou posição)</TooltipContent>
+                    <TooltipContent className="max-w-xs text-xs">Define a forma de busca do NCM (NCM, capítulo ou posição)</TooltipContent>
                   </Tooltip>
                 </label>
                 <div className="grid grid-cols-3 gap-2">
@@ -114,7 +122,7 @@ const Consulta = () => {
                     <TooltipTrigger asChild>
                       <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-xs text-xs">Valor total do produto importado em reais</TooltipContent>
+                    <TooltipContent className="max-w-xs text-xs">Valor total do produto importado em reais (R$)</TooltipContent>
                   </Tooltip>
                 </label>
                 <Input
