@@ -13,6 +13,15 @@ const tooltips: Record<string, string> = {
   ICMS: "Imposto sobre circulação de mercadorias",
 };
 
+const colTooltips: Record<string, string> = {
+  Destaque: "Código identificador da regra aplicada ao NCM",
+  "Descrição do Destaque": "Detalhamento da regra ou exigência aplicada",
+  Tratamento: "Tipo de controle administrativo aplicado à importação",
+  Exceções: "Situações em que a regra não se aplica",
+  Anuentes: "Órgãos responsáveis pela autorização",
+  Finalidade: "Objetivo da exigência ou controle",
+};
+
 const Resultado = () => {
   const navigate = useNavigate();
   const [data, setData] = useState<NCMData | null>(null);
@@ -41,10 +50,12 @@ const Resultado = () => {
   const fmt = (v: number) =>
     v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
+  const infoColumns = Object.keys(colTooltips);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <AppHeader showLogout />
-      <main className="flex-1 container mx-auto px-4 py-8 max-w-3xl space-y-6">
+      <main className="flex-1 container mx-auto px-4 py-8 max-w-4xl space-y-6">
         <Button variant="ghost" onClick={() => navigate("/consulta")} className="gap-2">
           <ArrowLeft className="h-4 w-4" /> Voltar à consulta
         </Button>
@@ -122,7 +133,7 @@ const Resultado = () => {
           </CardContent>
         </Card>
 
-        {/* BLOCO 3 - Informações Adicionais */}
+        {/* BLOCO 3 - Informações Adicionais (condicional) */}
         {data.informacoesAdicionais.length > 0 && (
           <Card className="shadow-md">
             <CardHeader className="flex flex-row items-center gap-2 pb-2">
@@ -134,15 +145,30 @@ const Resultado = () => {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-2 font-semibold text-foreground w-32">Tipo</th>
-                      <th className="text-left py-2 font-semibold text-foreground">Descrição</th>
+                      {infoColumns.map((col) => (
+                        <th key={col} className="text-left py-2 font-semibold text-foreground pr-4 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-1">
+                            {col}
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <HelpCircle className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                              </TooltipTrigger>
+                              <TooltipContent className="max-w-xs text-xs">{colTooltips[col]}</TooltipContent>
+                            </Tooltip>
+                          </span>
+                        </th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody>
                     {data.informacoesAdicionais.map((info, i) => (
-                      <tr key={i} className="border-b border-border/50">
-                        <td className="py-2.5 font-medium text-primary">{info.tipo}</td>
-                        <td className="py-2.5 text-foreground">{info.descricao}</td>
+                      <tr key={i} className="border-b border-border/50 hover:bg-muted/50 transition-colors">
+                        <td className="py-2.5 pr-4 font-medium text-primary whitespace-nowrap">{info.destaque}</td>
+                        <td className="py-2.5 pr-4 text-foreground">{info.descricaoDestaque}</td>
+                        <td className="py-2.5 pr-4 text-foreground whitespace-nowrap">{info.tratamento}</td>
+                        <td className="py-2.5 pr-4 text-foreground">{info.excecoes}</td>
+                        <td className="py-2.5 pr-4 text-foreground whitespace-nowrap">{info.anuentes}</td>
+                        <td className="py-2.5 text-foreground">{info.finalidade}</td>
                       </tr>
                     ))}
                   </tbody>
