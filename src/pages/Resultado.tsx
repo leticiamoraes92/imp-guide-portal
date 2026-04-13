@@ -8,9 +8,9 @@ import AppHeader from "@/components/AppHeader";
 import type { NCMData } from "@/lib/mockData";
 
 const tooltips: Record<string, string> = {
-  II: "Imposto de Importação: tributo federal cobrado sobre mercadorias importadas.",
-  IPI: "Imposto sobre Produtos Industrializados: incide sobre produtos nacionais e importados.",
-  ICMS: "Imposto sobre Circulação de Mercadorias e Serviços: tributo estadual.",
+  II: "Imposto de Importação aplicado sobre o valor aduaneiro",
+  IPI: "Imposto sobre Produtos Industrializados",
+  ICMS: "Imposto sobre circulação de mercadorias",
 };
 
 const Resultado = () => {
